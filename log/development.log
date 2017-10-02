@@ -130,3 +130,169 @@ Migrating to AddForeignKeyToBlogs (20171002194028)
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8427161621772540570)[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8427161621772540570)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to Blogs (20171002200455)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (18.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(8427161621772540570)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8427161621772540570)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to Blogs (20171002200455)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "blogs" ADD "entry_date" timestamp[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171002200455"]]
+  [1m[35m (26.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8427161621772540570)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (35.0ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "test"], ["password_digest", "$2a$10$dRF7tKuy99Agc1k0NVqaIe3l/0MrrL6pQxGhK.0CC.8veqg2MY7YK"], ["created_at", "2017-10-02 20:13:36.205814"], ["updated_at", "2017-10-02 20:13:36.205814"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started POST "/users/" for 127.0.0.1 at 2017-10-02 15:16:33 -0500
+Started POST "/users/" for 127.0.0.1 at 2017-10-02 15:16:33 -0500
+  [1m[35m (15.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (224.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+Processing by UsersController#create as */*
+Completed 400 Bad Request in 33ms (ActiveRecord: 0.0ms)
+
+
+Completed 400 Bad Request in 33ms (ActiveRecord: 0.0ms)
+
+
+  
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+  
+app/controllers/users_controller.rb:59:in `user_params'
+app/controllers/users_controller.rb:28:in `create'
+app/controllers/users_controller.rb:59:in `user_params'
+app/controllers/users_controller.rb:28:in `create'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:17:01 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 200 OK in 111ms (Views: 1.0ms | ActiveRecord: 11.6ms)
+
+
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:23:19 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 100ms (ActiveRecord: 4.7ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 0)):
+  
+app/controllers/users_controller.rb:54:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:23:38 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 66ms (ActiveRecord: 0.7ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 0)):
+  
+app/controllers/users_controller.rb:54:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:23:40 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 65ms (ActiveRecord: 0.3ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 0)):
+  
+app/controllers/users_controller.rb:54:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:24:42 -0500
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 131ms (ActiveRecord: 4.7ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 0)):
+  
+app/controllers/users_controller.rb:54:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:26:28 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 93ms (ActiveRecord: 0.3ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 1)):
+  
+app/controllers/users_controller.rb:55:in `[]'
+app/controllers/users_controller.rb:55:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:28:04 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 0.2ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 1)):
+  
+app/controllers/users_controller.rb:55:in `[]'
+app/controllers/users_controller.rb:55:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:28:26 -0500
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 138ms (ActiveRecord: 5.8ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 1)):
+  
+app/controllers/users_controller.rb:55:in `[]'
+app/controllers/users_controller.rb:55:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:30:21 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 80ms (ActiveRecord: 6.0ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 1)):
+  
+app/controllers/users_controller.rb:55:in `[]'
+app/controllers/users_controller.rb:55:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
+Started POST "/users/login" for 127.0.0.1 at 2017-10-02 15:34:03 -0500
+Processing by UsersController#login as */*
+  Parameters: {"user"=>{"username"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "test"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 68ms (ActiveRecord: 0.3ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 1)):
+  
+app/controllers/users_controller.rb:55:in `[]'
+app/controllers/users_controller.rb:55:in `create_token'
+app/controllers/users_controller.rb:9:in `login'
